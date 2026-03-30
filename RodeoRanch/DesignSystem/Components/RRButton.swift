@@ -12,7 +12,7 @@ struct RRButton: View {
     private var bgColor: Color {
         switch style {
         case .primary:     return .rrNavy
-        case .secondary:   return Color(UIColor.secondarySystemBackground)
+        case .secondary:   return Color(hex: "#f3f4f6")
         case .destructive: return .rrDanger
         case .ghost:       return .clear
         }
@@ -21,7 +21,16 @@ struct RRButton: View {
     private var fgColor: Color {
         switch style {
         case .primary, .destructive: return .white
-        case .secondary, .ghost: return .rrNavy
+        case .secondary:             return .rrNavy
+        case .ghost:                 return .rrNavy
+        }
+    }
+
+    private var borderColor: Color {
+        switch style {
+        case .secondary: return Color(hex: "#d1d5db")
+        case .ghost:     return Color(hex: "#d1d5db")
+        default:         return .clear
         }
     }
 
@@ -31,15 +40,23 @@ struct RRButton: View {
                 if isLoading {
                     ProgressView().tint(fgColor)
                 } else {
-                    if let icon { Image(systemName: icon) }
-                    Text(title).fontWeight(.semibold)
+                    if let icon {
+                        Image(systemName: icon)
+                            .foregroundColor(fgColor)
+                    }
+                    Text(title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(fgColor)
                 }
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
-            .foregroundColor(fgColor)
             .background(bgColor)
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(borderColor, lineWidth: 1)
+            )
         }
         .disabled(isLoading)
     }

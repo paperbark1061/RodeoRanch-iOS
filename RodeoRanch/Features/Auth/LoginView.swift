@@ -10,70 +10,77 @@ struct LoginView: View {
         ZStack {
             Color.rrNavy.ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                // Logo / header
-                VStack(spacing: 12) {
-                    Image(systemName: "star.circle.fill")
-                        .font(.system(size: 56))
-                        .foregroundColor(.rrGold)
+            ScrollView {
+                VStack(spacing: 0) {
 
-                    Text("RodeoRanch")
-                        .font(.rrDisplay)
-                        .foregroundColor(.white)
-
-                    Text("Rider & Judge Portal")
-                        .font(.rrBodySm)
-                        .foregroundColor(.white.opacity(0.6))
-                }
-                .padding(.top, 60)
-                .padding(.bottom, 48)
-
-                // Form card
-                VStack(spacing: 20) {
+                    // Logo / header
                     VStack(spacing: 12) {
-                        RRTextField(label: "Email", text: $email,
-                                    placeholder: "you@example.com",
-                                    keyboardType: .emailAddress)
-                        RRTextField(label: "Password", text: $password,
-                                    placeholder: "Your password",
-                                    isSecure: true)
-                    }
+                        Image(systemName: "star.circle.fill")
+                            .font(.system(size: 56))
+                            .foregroundColor(.rrGold)
 
-                    if let error = authState.errorMessage {
-                        Text(error)
+                        Text("RodeoRanch")
+                            .font(.rrDisplay)
+                            .foregroundColor(.white)
+
+                        Text("Rider & Judge Portal")
+                            .font(.rrBodySm)
+                            .foregroundColor(Color.white.opacity(0.7))
+                    }
+                    .padding(.top, 60)
+                    .padding(.bottom, 48)
+
+                    // Form card
+                    VStack(spacing: 20) {
+                        VStack(spacing: 12) {
+                            RRTextField(label: "Email",
+                                        text: $email,
+                                        placeholder: "you@example.com",
+                                        keyboardType: .emailAddress)
+                            RRTextField(label: "Password",
+                                        text: $password,
+                                        placeholder: "Your password",
+                                        isSecure: true)
+                        }
+
+                        if let error = authState.errorMessage {
+                            Text(error)
+                                .font(.rrCaption)
+                                .foregroundColor(.rrDanger)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+
+                        RRButton(title: "Sign in",
+                                 icon: "arrow.right",
+                                 isLoading: authState.isLoading) {
+                            Task { await authState.login(email: email, password: password) }
+                        }
+
+                        Text("Demo mode: tap Sign in with any credentials")
                             .font(.rrCaption)
-                            .foregroundColor(.rrDanger)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(.rrTextSecondary)
+                            .multilineTextAlignment(.center)
                     }
+                    .padding(24)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .padding(.horizontal, 24)
 
-                    RRButton(title: "Sign in", icon: "arrow.right",
-                             isLoading: authState.isLoading) {
-                        Task { await authState.login(email: email, password: password) }
+                    // Register link
+                    Button { showRegister = true } label: {
+                        HStack(spacing: 4) {
+                            Text("Don't have an account?")
+                                .foregroundColor(Color.white.opacity(0.7))
+                            Text("Register")
+                                .foregroundColor(.rrGold)
+                                .fontWeight(.semibold)
+                        }
+                        .font(.rrBodySm)
                     }
+                    .padding(.top, 24)
 
-                    // Demo note
-                    Text("Demo mode: tap Sign in with any credentials")
-                        .font(.rrCaption)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
+                    Spacer(minLength: 40)
                 }
-                .padding(24)
-                .background(Color(UIColor.systemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.horizontal, 24)
-
-                // Register
-                Button { showRegister = true } label: {
-                    Text("Don\'t have an account? ")
-                        .foregroundColor(.white.opacity(0.5))
-                    + Text("Register")
-                        .foregroundColor(.rrGold)
-                        .fontWeight(.semibold)
-                }
-                .font(.rrBodySm)
-                .padding(.top, 24)
-
-                Spacer()
             }
         }
         .sheet(isPresented: $showRegister) {
@@ -94,7 +101,7 @@ struct RRTextField: View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(.rrLabel)
-                .foregroundColor(.secondary)
+                .foregroundColor(.rrTextSecondary)
 
             Group {
                 if isSecure {
@@ -105,12 +112,13 @@ struct RRTextField: View {
                         .autocapitalization(.none)
                 }
             }
+            .foregroundColor(.rrTextPrimary)
             .padding(12)
-            .background(Color(UIColor.tertiarySystemBackground))
+            .background(Color.rrBg2)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(UIColor.separator), lineWidth: 0.5)
+                    .stroke(Color(hex: "#d1d5db"), lineWidth: 1)
             )
         }
     }

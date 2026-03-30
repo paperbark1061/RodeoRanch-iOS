@@ -12,7 +12,11 @@ struct RRCard<Content: View>: View {
     var body: some View {
         content
             .padding(padding)
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 12))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color(hex: "#e5e7eb"), lineWidth: 1)
+            )
     }
 }
