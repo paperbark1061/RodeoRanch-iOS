@@ -1,6 +1,6 @@
 import Foundation
 
-struct Horse: Identifiable, Codable {
+struct Horse: Identifiable, Codable, Hashable {
     let id: String
     var name: String
     var registrationNumber: String?
@@ -13,17 +13,26 @@ struct Horse: Identifiable, Codable {
     var notes: String?
     var isActive: Bool
     var photoURL: String?
+
+    // Hashable conformance — identity is the id
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: Horse, rhs: Horse) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
-enum HorseSex: String, Codable, CaseIterable {
+enum HorseSex: String, Codable, CaseIterable, Hashable {
     case mare
     case gelding
     case stallion
 
     var displayName: String {
         switch self {
-        case .mare: return "Mare"
-        case .gelding: return "Gelding"
+        case .mare:     return "Mare"
+        case .gelding:  return "Gelding"
         case .stallion: return "Stallion"
         }
     }

@@ -5,7 +5,8 @@ struct EventEntryFormView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var authState: AuthState
 
-    @State private var selectedHorse: Horse? = MockData.horses.first
+    // Bind the Picker to a horse id (String) — avoids Optional<Horse> Hashable issues
+    @State private var selectedHorseId: String = MockData.horses.first?.id ?? ""
     @State private var selectedDivision = "Open"
     @State private var teamMate1 = ""
     @State private var teamMate2 = ""
@@ -15,6 +16,7 @@ struct EventEntryFormView: View {
 
     private var divisions: [String] { ["Open", "Non-Pro", "Youth", "Senior"] }
     private var needsTeam: Bool { event.discipline == .teamPenning || event.discipline == .sorting }
+    private var selectedHorse: Horse? { MockData.horses.first { $0.id == selectedHorseId } }
 
     var body: some View {
         NavigationStack {
@@ -23,15 +25,15 @@ struct EventEntryFormView: View {
             } else {
                 Form {
                     Section("Event") {
-                        LabeledContent("Event", value: event.name)
+                        LabeledContent("Event",      value: event.name)
                         LabeledContent("Discipline", value: event.discipline.displayName)
-                        LabeledContent("Fee", value: String(format: "$%.2f", event.entryFee))
+                        LabeledContent("Fee",        value: String(format: "$%.2f", event.entryFee))
                     }
 
                     Section("Your horse") {
-                        Picker("Horse", selection: $selectedHorse) {
+                        Picker("Horse", selection: $selectedHorseId) {
                             ForEach(MockData.horses) { horse in
-                                Text(horse.name).tag(Optional(horse))
+                                Text(horse.name).tag(horse.id)
                             }
                         }
                     }
@@ -111,7 +113,7 @@ struct EntryConfirmedView: View {
                 .font(.rrBody)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
-            Text("You\'ll receive a notification when the draw is released.")
+            Text("You'll receive a notification when the draw is released.")
                 .font(.rrBodySm)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
