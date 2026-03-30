@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MyRunsView: View {
     @State private var selectedRun: Run?
-    private var upcoming: [Run] { MockData.myRuns.filter { $0.status == .upcoming || $0.status == .onDeck } }
+    private var upcoming:  [Run] { MockData.myRuns.filter { $0.status == .upcoming || $0.status == .onDeck } }
     private var completed: [Run] { MockData.myRuns.filter { $0.status == .completed } }
 
     var body: some View {
@@ -10,26 +10,18 @@ struct MyRunsView: View {
             List {
                 if !upcoming.isEmpty {
                     Section("Upcoming") {
-                        ForEach(upcoming) { run in
-                            RunRow(run: run)
-                                .onTapGesture { selectedRun = run }
-                        }
+                        ForEach(upcoming)  { RunRow(run: $0).onTapGesture { selectedRun = $0 } }
                     }
                 }
                 if !completed.isEmpty {
                     Section("Results") {
-                        ForEach(completed) { run in
-                            RunRow(run: run)
-                                .onTapGesture { selectedRun = run }
-                        }
+                        ForEach(completed) { RunRow(run: $0).onTapGesture { selectedRun = $0 } }
                     }
                 }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("My Runs")
-            .sheet(item: $selectedRun) { run in
-                RunDetailView(run: run)
-            }
+            .sheet(item: $selectedRun) { RunDetailView(run: $0) }
         }
     }
 }
@@ -40,18 +32,16 @@ struct RunRow: View {
         HStack(spacing: 12) {
             DisciplineBadge(discipline: run.discipline, size: .small)
             VStack(alignment: .leading, spacing: 4) {
-                Text(run.eventName).font(.rrTitle3)
-                Text(run.horseName).font(.rrBodySm).foregroundColor(.secondary)
+                Text(run.eventName).font(.rrTitle3).foregroundColor(.rrTextPrimary)
+                Text(run.horseName).font(.rrBodySm).foregroundColor(.rrTextSecondary)
                 if let team = run.teamMembers {
-                    Text(team.joined(separator: ", ")).font(.rrCaption).foregroundColor(.secondary)
+                    Text(team.joined(separator: ", ")).font(.rrCaption).foregroundColor(.rrTextSecondary)
                 }
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 4) {
                 if let result = run.result {
-                    if let placing = result.placing {
-                        PlacingBadge(placing: placing)
-                    }
+                    if let placing = result.placing { PlacingBadge(placing: placing) }
                     Text(run.discipline.scoringType == .judgePoints
                          ? String(format: "%.1f pts", result.judgeScore ?? 0)
                          : result.displayTime)
@@ -70,10 +60,10 @@ struct PlacingBadge: View {
     let placing: Int
     private var color: Color {
         switch placing {
-        case 1: return Color(hex: "#d4a017")   // gold
-        case 2: return Color(hex: "#aaaaaa")   // silver
-        case 3: return Color(hex: "#c07830")   // bronze
-        default: return .secondary
+        case 1: return Color(hex: "#d4a017")
+        case 2: return Color(hex: "#6b7280")
+        case 3: return Color(hex: "#c07830")
+        default: return .rrTextSecondary
         }
     }
     var body: some View {

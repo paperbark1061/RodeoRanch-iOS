@@ -3,33 +3,37 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var authState: AuthState
     @State private var showEditProfile = false
-
     var user: User? { authState.currentUser }
 
     var body: some View {
         NavigationStack {
             List {
-                // Avatar + name header
+                // Avatar + name
                 Section {
                     HStack(spacing: 16) {
                         ZStack {
                             Circle().fill(Color.rrNavy)
-                            Text(initials).font(.rrTitle2).foregroundColor(.white)
+                            Text(initials)
+                                .font(.rrTitle2)
+                                .foregroundColor(.white)
                         }
                         .frame(width: 64, height: 64)
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(user?.fullName ?? "").font(.rrTitle2)
-                            Text(user?.email ?? "").font(.rrBodySm).foregroundColor(.secondary)
+                            Text(user?.fullName ?? "")
+                                .font(.rrTitle2)
+                                .foregroundColor(.rrTextPrimary)
+                            Text(user?.email ?? "")
+                                .font(.rrBodySm)
+                                .foregroundColor(.rrTextSecondary)
                             if let club = user?.clubName {
-                                Text(club).font(.rrCaption).foregroundColor(.secondary)
+                                Text(club).font(.rrCaption).foregroundColor(.rrTextSecondary)
                             }
                         }
                     }
                     .padding(.vertical, 8)
                 }
 
-                // Membership
                 Section("Membership") {
                     if let mem = user?.membershipNumber {
                         LabeledContent("Member #", value: mem)
@@ -40,31 +44,33 @@ struct ProfileView: View {
                     }
                 }
 
-                // Roles
                 Section("Roles") {
                     ForEach(user?.roles ?? [], id: \.rawValue) { role in
                         HStack {
                             Image(systemName: roleIcon(role))
                                 .foregroundColor(.rrNavy)
                                 .frame(width: 24)
-                            Text(role.rawValue.replacingOccurrences(of: "_", with: " ").capitalized)
+                            Text(role.rawValue
+                                .replacingOccurrences(of: "_", with: " ")
+                                .capitalized)
+                            .foregroundColor(.rrTextPrimary)
                         }
                     }
                 }
 
-                // Settings
                 Section("Settings") {
                     Button { showEditProfile = true } label: {
                         Label("Edit profile", systemImage: "pencil")
+                            .foregroundColor(.rrTextPrimary)
                     }
                     NavigationLink {
                         NotificationSettingsView()
                     } label: {
                         Label("Notification settings", systemImage: "bell")
+                            .foregroundColor(.rrTextPrimary)
                     }
                 }
 
-                // Sign out
                 Section {
                     Button(role: .destructive) {
                         authState.logout()
@@ -75,9 +81,7 @@ struct ProfileView: View {
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Profile")
-            .sheet(isPresented: $showEditProfile) {
-                EditProfileView()
-            }
+            .sheet(isPresented: $showEditProfile) { EditProfileView() }
         }
     }
 
@@ -85,31 +89,30 @@ struct ProfileView: View {
         guard let u = user else { return "?" }
         return "\(u.firstName.prefix(1))\(u.lastName.prefix(1))"
     }
-
     private func roleIcon(_ role: UserRole) -> String {
         switch role {
-        case .rider:       return "person.fill"
-        case .judge:       return "stopwatch.fill"
-        case .clubAdmin:   return "building.2.fill"
-        case .eventAdmin:  return "calendar.badge.gear"
-        case .superAdmin:  return "shield.fill"
+        case .rider:      return "person.fill"
+        case .judge:      return "stopwatch.fill"
+        case .clubAdmin:  return "building.2.fill"
+        case .eventAdmin: return "calendar.badge.gear"
+        case .superAdmin: return "shield.fill"
         }
     }
 }
 
 struct NotificationSettingsView: View {
     @State private var drawReleased = true
-    @State private var runUpNext = true
-    @State private var results = true
-    @State private var general = false
+    @State private var runUpNext    = true
+    @State private var results      = true
+    @State private var general      = false
 
     var body: some View {
         Form {
             Section("Push notifications") {
-                Toggle("Draw released",    isOn: $drawReleased)
-                Toggle("You\'re up next",  isOn: $runUpNext)
-                Toggle("Results posted",   isOn: $results)
-                Toggle("General updates",  isOn: $general)
+                Toggle("Draw released",   isOn: $drawReleased)
+                Toggle("You're up next",  isOn: $runUpNext)
+                Toggle("Results posted",  isOn: $results)
+                Toggle("General updates", isOn: $general)
             }
         }
         .navigationTitle("Notifications")
@@ -133,7 +136,6 @@ struct EditProfileView: View {
                 }
                 Section {
                     RRButton(title: "Save changes") {
-                        // TODO: PATCH /api/auth/me
                         dismiss()
                     }
                     .listRowInsets(EdgeInsets())
@@ -143,7 +145,7 @@ struct EditProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("Cancel") { dismiss() }.foregroundColor(.rrNavy)
                 }
             }
         }

@@ -6,21 +6,19 @@ struct StandingsView: View {
     private let board = MockData.leaderboard
 
     var filteredEntries: [StandingsEntry] {
-        board.entries.filter { $0.division == selectedDivision || selectedDivision == "All" }
+        board.entries.filter { $0.division == selectedDivision }
     }
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Event header
                 RRCard(padding: 12) {
                     HStack {
                         DisciplineBadge(discipline: board.discipline)
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(board.eventName).font(.rrTitle3)
+                            Text(board.eventName).font(.rrTitle3).foregroundColor(.rrTextPrimary)
                             Text("Updated \(board.lastUpdated, style: .relative) ago")
-                                .font(.rrCaption)
-                                .foregroundColor(.secondary)
+                                .font(.rrCaption).foregroundColor(.rrTextSecondary)
                         }
                         Spacer()
                         EventStatusBadge(status: .live)
@@ -29,7 +27,6 @@ struct StandingsView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 8)
 
-                // Division picker
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(divisions, id: \.self) { div in
@@ -44,12 +41,13 @@ struct StandingsView: View {
 
                 Divider()
 
-                // Leaderboard list
                 List(filteredEntries) { entry in
                     StandingsRow(entry: entry)
+                        .listRowBackground(entry.isCurrentUser ? Color.rrNavy.opacity(0.06) : Color.white)
                 }
                 .listStyle(.plain)
             }
+            .background(Color.rrBg2)
             .navigationTitle("Standings")
         }
     }
@@ -60,7 +58,6 @@ struct StandingsRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Placing number
             ZStack {
                 Circle()
                     .fill(placingColor.opacity(0.15))
@@ -74,7 +71,7 @@ struct StandingsRow: View {
                 HStack(spacing: 6) {
                     Text(entry.riderName)
                         .font(.rrTitle3)
-                        .foregroundColor(entry.isCurrentUser ? .rrNavy : .primary)
+                        .foregroundColor(entry.isCurrentUser ? .rrNavy : .rrTextPrimary)
                     if entry.isCurrentUser {
                         Text("You")
                             .font(.system(size: 10, weight: .bold))
@@ -85,11 +82,9 @@ struct StandingsRow: View {
                             .clipShape(Capsule())
                     }
                 }
-                Text(entry.horseName)
-                    .font(.rrBodySm)
-                    .foregroundColor(.secondary)
+                Text(entry.horseName).font(.rrBodySm).foregroundColor(.rrTextSecondary)
                 if let team = entry.teamName {
-                    Text(team).font(.rrCaption).foregroundColor(.secondary)
+                    Text(team).font(.rrCaption).foregroundColor(.rrTextSecondary)
                 }
             }
 
@@ -101,15 +96,14 @@ struct StandingsRow: View {
                 .multilineTextAlignment(.trailing)
         }
         .padding(.vertical, 4)
-        .listRowBackground(entry.isCurrentUser ? Color.rrNavy.opacity(0.05) : Color.clear)
     }
 
     private var placingColor: Color {
         switch entry.placing {
         case 1: return Color(hex: "#d4a017")
-        case 2: return Color(hex: "#999999")
+        case 2: return Color(hex: "#6b7280")
         case 3: return Color(hex: "#c07830")
-        default: return .secondary
+        default: return .rrTextSecondary
         }
     }
 }

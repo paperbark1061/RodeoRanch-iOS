@@ -7,7 +7,7 @@ struct DashboardView: View {
 
     var user: User? { authState.currentUser }
     var liveEvents: [Event] { MockData.events.filter { $0.status == .live } }
-    var upcomingRuns: [Run] { MockData.myRuns.filter { $0.status == .upcoming } }
+    var upcomingRuns: [Run]  { MockData.myRuns.filter { $0.status == .upcoming } }
 
     var body: some View {
         NavigationStack {
@@ -16,30 +16,27 @@ struct DashboardView: View {
 
                     // Greeting
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("G\'day, \(user?.firstName ?? "Rider")")
+                        Text("G'day, \(user?.firstName ?? "Rider")")
                             .font(.rrTitle)
+                            .foregroundColor(.rrTextPrimary)
                         Text(user?.clubName ?? "")
                             .font(.rrBodySm)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.rrTextSecondary)
                     }
                     .padding(.horizontal)
 
                     // Next run card
                     if let nextRun = upcomingRuns.first {
-                        NextRunCard(run: nextRun)
-                            .padding(.horizontal)
+                        NextRunCard(run: nextRun).padding(.horizontal)
                     }
 
-                    // Live events section
+                    // Live events
                     if !liveEvents.isEmpty {
                         SectionHeader(title: "Live now", icon: "dot.radiowaves.left.and.right")
                             .padding(.horizontal)
-
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 12) {
-                                ForEach(liveEvents) { event in
-                                    LiveEventCard(event: event)
-                                }
+                                ForEach(liveEvents) { LiveEventCard(event: $0) }
                             }
                             .padding(.horizontal)
                         }
@@ -50,19 +47,11 @@ struct DashboardView: View {
                         .padding(.horizontal)
 
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                        QuickActionTile(title: "Enter event", icon: "plus.circle.fill", color: .rrNavy) {
-                            router.navigate(to: .events)
-                        }
-                        QuickActionTile(title: "My runs", icon: "timer", color: .discGold) {
-                            router.navigate(to: .myRuns)
-                        }
-                        QuickActionTile(title: "Standings", icon: "list.number", color: .discBlue) {
-                            router.navigate(to: .standings)
-                        }
+                        QuickActionTile(title: "Enter event", icon: "plus.circle.fill",  color: .rrNavy)  { router.navigate(to: .events) }
+                        QuickActionTile(title: "My runs",    icon: "timer",              color: .discGold) { router.navigate(to: .myRuns) }
+                        QuickActionTile(title: "Standings",  icon: "list.number",        color: .discBlue) { router.navigate(to: .standings) }
                         if authState.currentUser?.isJudge == true {
-                            QuickActionTile(title: "Judge mode", icon: "stopwatch.fill", color: .discTeal) {
-                                router.navigate(to: .judge)
-                            }
+                            QuickActionTile(title: "Judge mode", icon: "stopwatch.fill", color: .discTeal) { router.navigate(to: .judge) }
                         }
                     }
                     .padding(.horizontal)
@@ -71,26 +60,26 @@ struct DashboardView: View {
                 }
                 .padding(.top, 8)
             }
+            .background(Color.rrBg2)
             .navigationTitle("RodeoRanch")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showNotifications = true } label: {
-                        Image(systemName: "bell.fill")
-                            .overlay(alignment: .topTrailing) {
-                                let unread = MockData.notifications.filter { !$0.isRead }.count
-                                if unread > 0 {
-                                    Circle().fill(Color.rrDanger)
-                                        .frame(width: 8, height: 8)
-                                        .offset(x: 2, y: -2)
-                                }
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: "bell.fill")
+                                .foregroundColor(.rrNavy)
+                            let unread = MockData.notifications.filter { !$0.isRead }.count
+                            if unread > 0 {
+                                Circle().fill(Color.rrDanger)
+                                    .frame(width: 8, height: 8)
+                                    .offset(x: 4, y: -2)
                             }
+                        }
                     }
                 }
             }
-            .sheet(isPresented: $showNotifications) {
-                NotificationsView()
-            }
+            .sheet(isPresented: $showNotifications) { NotificationsView() }
         }
     }
 }
@@ -104,19 +93,20 @@ struct NextRunCard: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     DisciplineBadge(discipline: run.discipline)
-                    Text(run.eventName).font(.rrLabel).foregroundColor(.secondary)
+                    Text(run.eventName).font(.rrLabel).foregroundColor(.rrTextSecondary)
                     Spacer()
                     EventStatusBadge(status: .live)
                 }
-                Text("You\'re run #\(run.drawPosition ?? 0)")
+                Text("You're run #\(run.drawPosition ?? 0)")
                     .font(.rrTitle2)
+                    .foregroundColor(.rrTextPrimary)
                 Text("\(run.horseName) · \(run.division ?? "Open")")
                     .font(.rrBodySm)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.rrTextSecondary)
                 if let team = run.teamMembers {
                     Text(team.joined(separator: " · "))
                         .font(.rrCaption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.rrTextSecondary)
                 }
             }
         }
@@ -129,8 +119,8 @@ struct LiveEventCard: View {
         RRCard(padding: 14) {
             VStack(alignment: .leading, spacing: 8) {
                 DisciplineBadge(discipline: event.discipline, size: .small)
-                Text(event.name).font(.rrTitle3).lineLimit(2)
-                Text(event.venue).font(.rrCaption).foregroundColor(.secondary).lineLimit(1)
+                Text(event.name).font(.rrTitle3).foregroundColor(.rrTextPrimary).lineLimit(2)
+                Text(event.venue).font(.rrCaption).foregroundColor(.rrTextSecondary).lineLimit(1)
                 EventStatusBadge(status: event.status)
             }
             .frame(width: 180)
@@ -168,6 +158,6 @@ struct SectionHeader: View {
     var body: some View {
         Label(title, systemImage: icon)
             .font(.rrTitle3)
-            .foregroundColor(.primary)
+            .foregroundColor(.rrTextPrimary)
     }
 }
