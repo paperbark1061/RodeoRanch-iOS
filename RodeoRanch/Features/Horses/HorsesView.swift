@@ -11,22 +11,19 @@ struct HorsesView: View {
                 Button { selectedHorse = horse } label: {
                     HorseRow(horse: horse)
                 }
+                .listRowBackground(Color.white)
             }
             .listStyle(.insetGrouped)
             .navigationTitle("My Horses")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showAddHorse = true } label: {
-                        Image(systemName: "plus")
+                        Image(systemName: "plus").foregroundColor(.rrNavy)
                     }
                 }
             }
-            .sheet(isPresented: $showAddHorse) {
-                AddHorseView(horses: $horses)
-            }
-            .sheet(item: $selectedHorse) { horse in
-                HorseDetailView(horse: horse)
-            }
+            .sheet(isPresented: $showAddHorse) { AddHorseView(horses: $horses) }
+            .sheet(item: $selectedHorse)        { HorseDetailView(horse: $0) }
         }
     }
 }
@@ -36,19 +33,19 @@ struct HorseRow: View {
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
-                Circle().fill(Color.rrNavy.opacity(0.12))
+                Circle().fill(Color.rrNavy.opacity(0.10))
                 HorseIcon(size: 22, color: .rrNavy)
             }
             .frame(width: 44, height: 44)
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(horse.name).font(.rrTitle3)
+                Text(horse.name).font(.rrTitle3).foregroundColor(.rrTextPrimary)
                 HStack(spacing: 8) {
                     if let breed = horse.breed  { Text(breed).font(.rrCaption) }
                     Text(horse.sex.displayName).font(.rrCaption)
                     if let year = horse.yearOfBirth { Text(String(year)).font(.rrCaption) }
                 }
-                .foregroundColor(.secondary)
+                .foregroundColor(.rrTextSecondary)
             }
             Spacer()
             if let reg = horse.registrationNumber {
@@ -74,13 +71,11 @@ struct HorseDetailView: View {
                     if let year   = horse.yearOfBirth { LabeledContent("Year", value: String(year)) }
                 }
                 if let reg = horse.registrationNumber {
-                    Section("Registration") {
-                        LabeledContent("Number", value: reg)
-                    }
+                    Section("Registration") { LabeledContent("Number", value: reg) }
                 }
                 if let notes = horse.notes {
                     Section("Notes") {
-                        Text(notes).font(.rrBodySm).foregroundColor(.secondary)
+                        Text(notes).font(.rrBodySm).foregroundColor(.rrTextSecondary)
                     }
                 }
             }
@@ -88,7 +83,7 @@ struct HorseDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") { dismiss() }
+                    Button("Done") { dismiss() }.foregroundColor(.rrNavy)
                 }
             }
         }
@@ -122,21 +117,17 @@ struct AddHorseView: View {
                 }
                 Section {
                     RRButton(title: "Save horse") {
-                        let newHorse = Horse(
-                            id: UUID().uuidString,
-                            name: name,
+                        let h = Horse(
+                            id: UUID().uuidString, name: name,
                             registrationNumber: regNumber.isEmpty ? nil : regNumber,
-                            breed:  breed.isEmpty  ? nil : breed,
+                            breed: breed.isEmpty ? nil : breed,
                             colour: colour.isEmpty ? nil : colour,
-                            sex: sex,
-                            yearOfBirth: Int(yearOfBirth),
-                            ownerId:   MockData.currentUser.id,
+                            sex: sex, yearOfBirth: Int(yearOfBirth),
+                            ownerId: MockData.currentUser.id,
                             ownerName: MockData.currentUser.fullName,
-                            notes: nil,
-                            isActive: true,
-                            photoURL: nil
+                            notes: nil, isActive: true, photoURL: nil
                         )
-                        horses.append(newHorse)
+                        horses.append(h)
                         dismiss()
                     }
                     .disabled(name.isEmpty)
@@ -147,7 +138,7 @@ struct AddHorseView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("Cancel") { dismiss() }.foregroundColor(.rrNavy)
                 }
             }
         }

@@ -12,105 +12,84 @@ struct EventDetailView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
 
-                    // Header
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             DisciplineBadge(discipline: event.discipline, size: .large)
                             Spacer()
                             EventStatusBadge(status: event.status)
                         }
-                        Text(event.name).font(.rrTitle)
-                        Text(event.venue).font(.rrBody).foregroundColor(.secondary)
+                        Text(event.name).font(.rrTitle).foregroundColor(.rrTextPrimary)
+                        Text(event.venue).font(.rrBody).foregroundColor(.rrTextSecondary)
                     }
                     .padding(.horizontal)
 
                     Divider()
 
-                    // Details grid
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        DetailCell(label: "Start", value: event.startDate.formatted(.dateTime.day().month().year()))
-                        DetailCell(label: "End",   value: event.endDate.formatted(.dateTime.day().month().year()))
-                        DetailCell(label: "Fee",   value: String(format: "$%.2f", event.entryFee))
-                        DetailCell(label: "Region", value: event.region.displayName)
+                        DetailCell(label: "Start",   value: event.startDate.formatted(.dateTime.day().month().year()))
+                        DetailCell(label: "End",     value: event.endDate.formatted(.dateTime.day().month().year()))
+                        DetailCell(label: "Fee",     value: String(format: "$%.2f", event.entryFee))
+                        DetailCell(label: "Region",  value: event.region.displayName)
                         DetailCell(label: "Entries", value: "\(event.currentEntries) / \(event.maxEntries)")
-                        DetailCell(label: "Draw",   value: event.drawReleased ? "Released" : "TBA")
+                        DetailCell(label: "Draw",    value: event.drawReleased ? "Released" : "TBA")
                     }
                     .padding(.horizontal)
 
-                    // Entry fill bar
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
-                            Text("Entries").font(.rrLabel)
+                            Text("Entries").font(.rrLabel).foregroundColor(.rrTextPrimary)
                             Spacer()
-                            Text("\(event.currentEntries)/\(event.maxEntries)").font(.rrCaption).foregroundColor(.secondary)
+                            Text("\(event.currentEntries)/\(event.maxEntries)")
+                                .font(.rrCaption).foregroundColor(.rrTextSecondary)
                         }
                         ProgressView(value: event.entryPercentage)
-                            .tint(event.entryPercentage > 0.85 ? .rrDanger : event.entryPercentage > 0.6 ? .rrWarning : .rrSuccess)
+                            .tint(event.entryPercentage > 0.85 ? .rrDanger :
+                                  event.entryPercentage > 0.60 ? .rrWarning : .rrSuccess)
                     }
                     .padding(.horizontal)
 
                     if let desc = event.description {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("About").font(.rrLabel)
-                            Text(desc).font(.rrBodySm).foregroundColor(.secondary)
+                            Text("About").font(.rrLabel).foregroundColor(.rrTextPrimary)
+                            Text(desc).font(.rrBodySm).foregroundColor(.rrTextSecondary)
                         }
                         .padding(.horizontal)
                     }
 
-                    // My run card (if already entered)
                     if let run = myRun {
                         RRCard {
                             VStack(alignment: .leading, spacing: 8) {
                                 Label("My entry", systemImage: "checkmark.circle.fill")
-                                    .font(.rrTitle3)
-                                    .foregroundColor(.rrSuccess)
+                                    .font(.rrTitle3).foregroundColor(.rrSuccess)
                                 if let pos = run.drawPosition {
-                                    Text("Draw position: #\(pos)").font(.rrBody)
+                                    Text("Draw position: #\(pos)").font(.rrBody).foregroundColor(.rrTextPrimary)
                                 } else {
-                                    Text("Draw not yet released").font(.rrBodySm).foregroundColor(.secondary)
+                                    Text("Draw not yet released").font(.rrBodySm).foregroundColor(.rrTextSecondary)
                                 }
                             }
                         }
                         .padding(.horizontal)
                     } else if !event.isFull && event.status == .open {
-                        RRButton(title: "Enter this event", icon: "plus") {
-                            showEntryForm = true
-                        }
-                        .padding(.horizontal)
+                        RRButton(title: "Enter this event", icon: "plus") { showEntryForm = true }
+                            .padding(.horizontal)
                     } else if event.isFull {
                         Label("Event full", systemImage: "xmark.circle")
-                            .foregroundColor(.rrDanger)
-                            .padding(.horizontal)
+                            .foregroundColor(.rrDanger).padding(.horizontal)
                     }
 
                     Spacer(minLength: 40)
                 }
                 .padding(.top, 16)
             }
+            .background(Color.rrBg2)
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") { dismiss() }
+                    Button("Done") { dismiss() }.foregroundColor(.rrNavy)
                 }
             }
-            .sheet(isPresented: $showEntryForm) {
-                EventEntryFormView(event: event)
-            }
-        }
-    }
-}
-
-struct DetailCell: View {
-    let label: String
-    let value: String
-    var body: some View {
-        RRCard(padding: 12) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(label).font(.rrCaption).foregroundColor(.secondary)
-                Text(value).font(.rrTitle3)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .sheet(isPresented: $showEntryForm) { EventEntryFormView(event: event) }
         }
     }
 }

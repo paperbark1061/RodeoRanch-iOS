@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// Entry point for judge mode. Shows the active run queue for a selected event.
 struct JudgeModeView: View {
     @State private var selectedEvent: Event? = MockData.events.first { $0.status == .live }
     @State private var activeRun: Run?
@@ -11,18 +10,16 @@ struct JudgeModeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Arena mode banner
+                // Arena banner
                 HStack {
-                    Image(systemName: "stopwatch.fill")
-                    Text("Judge mode")
-                        .font(.rrTitle3)
+                    Image(systemName: "stopwatch.fill").foregroundColor(.white)
+                    Text("Judge mode").font(.rrTitle3).foregroundColor(.white)
                     Spacer()
                     if let event = selectedEvent {
                         DisciplineBadge(discipline: event.discipline)
                     }
                 }
                 .padding()
-                .foregroundColor(.white)
                 .background(Color.rrNavy)
 
                 // Event selector
@@ -38,10 +35,10 @@ struct JudgeModeView: View {
                     .padding(.horizontal)
                     .padding(.vertical, 8)
                 }
+                .background(Color.white)
 
                 Divider()
 
-                // Run queue
                 List {
                     Section("Run queue") {
                         ForEach(queue) { run in
@@ -49,11 +46,13 @@ struct JudgeModeView: View {
                                 activeRun = run
                                 showScoreEntry = true
                             }
+                            .listRowBackground(Color.white)
                         }
                     }
                 }
                 .listStyle(.insetGrouped)
             }
+            .background(Color.rrBg2)
             .navigationTitle("")
             .navigationBarHidden(true)
             .sheet(isPresented: $showScoreEntry) {
@@ -74,13 +73,15 @@ struct JudgeRunRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     if let pos = run.drawPosition {
-                        Text("#\(pos)").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(.rrGold)
+                        Text("#\(pos)")
+                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .foregroundColor(.rrGold)
                     }
-                    Text(run.riderName).font(.rrTitle3)
+                    Text(run.riderName).font(.rrTitle3).foregroundColor(.rrTextPrimary)
                 }
-                Text(run.horseName).font(.rrBodySm).foregroundColor(.secondary)
+                Text(run.horseName).font(.rrBodySm).foregroundColor(.rrTextSecondary)
                 if let team = run.teamMembers {
-                    Text(team.joined(separator: " · ")).font(.rrCaption).foregroundColor(.secondary)
+                    Text(team.joined(separator: " · ")).font(.rrCaption).foregroundColor(.rrTextSecondary)
                 }
             }
             Spacer()
