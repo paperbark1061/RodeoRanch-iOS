@@ -10,7 +10,7 @@ struct RodeoRanchApp: App {
             ContentView()
                 .environmentObject(authState)
                 .environmentObject(appRouter)
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.light)
         }
     }
 }
