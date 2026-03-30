@@ -19,7 +19,16 @@ struct MainTabView: View {
                 .tag(AppTab.myRuns)
 
             HorsesView()
-                .tabItem { Label("Horses", systemImage: "hare.fill") }
+                .tabItem {
+                    // Tab items only support Image/Label, not arbitrary views.
+                    // We render the custom HorseShape into a UIImage at tab-bar size.
+                    Label {
+                        Text("Horses")
+                    } icon: {
+                        Image(uiImage: HorseShape.uiImage(size: 24))
+                            .renderingMode(.template)
+                    }
+                }
                 .tag(AppTab.horses)
 
             StandingsView()

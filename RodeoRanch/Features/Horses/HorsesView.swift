@@ -37,15 +37,14 @@ struct HorseRow: View {
         HStack(spacing: 12) {
             ZStack {
                 Circle().fill(Color.rrNavy.opacity(0.12))
-                Image(systemName: "hare.fill")
-                    .foregroundColor(.rrNavy)
+                HorseIcon(size: 22, color: .rrNavy)
             }
             .frame(width: 44, height: 44)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(horse.name).font(.rrTitle3)
                 HStack(spacing: 8) {
-                    if let breed = horse.breed { Text(breed).font(.rrCaption) }
+                    if let breed = horse.breed  { Text(breed).font(.rrCaption) }
                     Text(horse.sex.displayName).font(.rrCaption)
                     if let year = horse.yearOfBirth { Text(String(year)).font(.rrCaption) }
                 }
@@ -70,9 +69,9 @@ struct HorseDetailView: View {
                 Section("Details") {
                     LabeledContent("Name",   value: horse.name)
                     LabeledContent("Sex",    value: horse.sex.displayName)
-                    if let breed = horse.breed { LabeledContent("Breed",  value: breed) }
+                    if let breed  = horse.breed  { LabeledContent("Breed",  value: breed) }
                     if let colour = horse.colour { LabeledContent("Colour", value: colour) }
-                    if let year = horse.yearOfBirth { LabeledContent("Year",  value: String(year)) }
+                    if let year   = horse.yearOfBirth { LabeledContent("Year", value: String(year)) }
                 }
                 if let reg = horse.registrationNumber {
                     Section("Registration") {
@@ -114,24 +113,24 @@ struct AddHorseView: View {
                     Picker("Sex", selection: $sex) {
                         ForEach(HorseSex.allCases, id: \.self) { Text($0.displayName).tag($0) }
                     }
-                    TextField("Breed", text: $breed)
-                    TextField("Colour", text: $colour)
-                    TextField("Year of birth", text: $yearOfBirth).keyboardType(.numberPad)
+                    TextField("Breed",         text: $breed)
+                    TextField("Colour",         text: $colour)
+                    TextField("Year of birth",  text: $yearOfBirth).keyboardType(.numberPad)
                 }
                 Section("Registration") {
                     TextField("Registration number (optional)", text: $regNumber)
                 }
                 Section {
-                    RRButton(title: "Save horse", icon: "hare.fill") {
+                    RRButton(title: "Save horse") {
                         let newHorse = Horse(
                             id: UUID().uuidString,
                             name: name,
                             registrationNumber: regNumber.isEmpty ? nil : regNumber,
-                            breed: breed.isEmpty ? nil : breed,
+                            breed:  breed.isEmpty  ? nil : breed,
                             colour: colour.isEmpty ? nil : colour,
                             sex: sex,
                             yearOfBirth: Int(yearOfBirth),
-                            ownerId: MockData.currentUser.id,
+                            ownerId:   MockData.currentUser.id,
                             ownerName: MockData.currentUser.fullName,
                             notes: nil,
                             isActive: true,
