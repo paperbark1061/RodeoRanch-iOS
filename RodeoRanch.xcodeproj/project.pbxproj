@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01AA0001 /* RodeoRanchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0001F; };
+		01AA0002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0002F; };
+		01AA0003 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0003F; };
+		01AA0010 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0010F; };
+		01AA0011 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0011F; };
+		01AA0012 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0012F; };
+		01AA0013 /* Horse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0013F; };
+		01AA0014 /* StandingsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0014F; };
+		01AA0015 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0015F; };
+		01AA0020 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0020F; };
+		01AA0021 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0021F; };
+		01AA0030 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0030F; };
+		01AA0040 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0040F; };
+		01AA0050 /* RRColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0050F; };
+		01AA0051 /* RRFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0051F; };
+		01AA0052 /* DisciplineBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0052F; };
+		01AA0053 /* EventStatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0053F; };
+		01AA0054 /* RRCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0054F; };
+		01AA0055 /* RRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0055F; };
+		01AA0060 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0060F; };
+		01AA0061 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0061F; };
+		01AA0070 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0070F; };
+		01AA0071 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0071F; };
+		01AA0080 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0080F; };
+		01AA0081 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0081F; };
+		01AA0082 /* EventEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0082F; };
+		01AA0090 /* MyRunsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0090F; };
+		01AA0091 /* RunDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0091F; };
+		01AA0100 /* HorsesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0100F; };
+		01AA0110 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0110F; };
+		01AA0120 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0120F; };
+		01AA0130 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0130F; };
+		01AA0140 /* JudgeModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0140F; };
+		01AA0141 /* ScoreEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA0141F; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01AA0001F /* RodeoRanchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RodeoRanchApp.swift; sourceTree = "<group>"; };
+		01AA0002F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		01AA0003F /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		01AA0010F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		01AA0011F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		01AA0012F /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		01AA0013F /* Horse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horse.swift; sourceTree = "<group>"; };
+		01AA0014F /* StandingsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsEntry.swift; sourceTree = "<group>"; };
+		01AA0015F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		01AA0020F /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		01AA0021F /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		01AA0030F /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		01AA0040F /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		01AA0050F /* RRColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRColors.swift; sourceTree = "<group>"; };
+		01AA0051F /* RRFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRFonts.swift; sourceTree = "<group>"; };
+		01AA0052F /* DisciplineBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisciplineBadge.swift; sourceTree = "<group>"; };
+		01AA0053F /* EventStatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatusBadge.swift; sourceTree = "<group>"; };
+		01AA0054F /* RRCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRCard.swift; sourceTree = "<group>"; };
+		01AA0055F /* RRButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRButton.swift; sourceTree = "<group>"; };
+		01AA0060F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		01AA0061F /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		01AA0070F /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		01AA0071F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		01AA0080F /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		01AA0081F /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		01AA0082F /* EventEntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntryFormView.swift; sourceTree = "<group>"; };
+		01AA0090F /* MyRunsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRunsView.swift; sourceTree = "<group>"; };
+		01AA0091F /* RunDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailView.swift; sourceTree = "<group>"; };
+		01AA0100F /* HorsesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorsesView.swift; sourceTree = "<group>"; };
+		01AA0110F /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
+		01AA0120F /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		01AA0130F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		01AA0140F /* JudgeModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JudgeModeView.swift; sourceTree = "<group>"; };
+		01AA0141F /* ScoreEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEntryView.swift; sourceTree = "<group>"; };
+		PROD0001 /* RodeoRanch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RodeoRanch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FRAME001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ROOTGROUP /* = */ = {
+			isa = PBXGroup;
+			children = (
+				APPGROUP /* RodeoRanch */,
+				PRODGROUP /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		PRODGROUP /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				PROD0001 /* RodeoRanch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		APPGROUP /* RodeoRanch */ = {
+			isa = PBXGroup;
+			children = (
+				GRP_APP /* App */,
+				GRP_CORE /* Core */,
+				GRP_FEATURES /* Features */,
+				GRP_DS /* DesignSystem */,
+			);
+			path = RodeoRanch;
+			sourceTree = "<group>";
+		};
+		GRP_APP /* App */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0001F /* RodeoRanchApp.swift */,
+				01AA0002F /* ContentView.swift */,
+				01AA0003F /* AppRouter.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		GRP_CORE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				GRP_MODELS, GRP_NETWORK, GRP_AUTH, GRP_MOCK,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		GRP_MODELS /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0010F /* User.swift */,
+				01AA0011F /* Event.swift */,
+				01AA0012F /* Run.swift */,
+				01AA0013F /* Horse.swift */,
+				01AA0014F /* StandingsEntry.swift */,
+				01AA0015F /* Notification.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		GRP_NETWORK /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0020F /* APIConfig.swift */,
+				01AA0021F /* APIService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		GRP_AUTH /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0030F /* AuthState.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		GRP_MOCK /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0040F /* MockData.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		GRP_DS /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0050F /* RRColors.swift */,
+				01AA0051F /* RRFonts.swift */,
+				GRP_COMPONENTS,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		GRP_COMPONENTS /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				01AA0052F /* DisciplineBadge.swift */,
+				01AA0053F /* EventStatusBadge.swift */,
+				01AA0054F /* RRCard.swift */,
+				01AA0055F /* RRButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		GRP_FEATURES /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				GRP_F_AUTH, GRP_F_DASH, GRP_F_EVENTS, GRP_F_RUNS,
+				GRP_F_HORSES, GRP_F_STANDINGS, GRP_F_NOTIFS, GRP_F_PROFILE, GRP_F_JUDGE,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		GRP_F_AUTH = { isa = PBXGroup; children = (01AA0060F, 01AA0061F,); path = Auth; sourceTree = "<group>"; };
+		GRP_F_DASH = { isa = PBXGroup; children = (01AA0070F, 01AA0071F,); path = Dashboard; sourceTree = "<group>"; };
+		GRP_F_EVENTS = { isa = PBXGroup; children = (01AA0080F, 01AA0081F, 01AA0082F,); path = Events; sourceTree = "<group>"; };
+		GRP_F_RUNS = { isa = PBXGroup; children = (01AA0090F, 01AA0091F,); path = MyRuns; sourceTree = "<group>"; };
+		GRP_F_HORSES = { isa = PBXGroup; children = (01AA0100F,); path = Horses; sourceTree = "<group>"; };
+		GRP_F_STANDINGS = { isa = PBXGroup; children = (01AA0110F,); path = Standings; sourceTree = "<group>"; };
+		GRP_F_NOTIFS = { isa = PBXGroup; children = (01AA0120F,); path = Notifications; sourceTree = "<group>"; };
+		GRP_F_PROFILE = { isa = PBXGroup; children = (01AA0130F,); path = Profile; sourceTree = "<group>"; };
+		GRP_F_JUDGE = { isa = PBXGroup; children = (01AA0140F, 01AA0141F,); path = Judge; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		TARGET01 /* RodeoRanch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BUILDCFG_LIST;
+			buildPhases = (
+				SOURCES01 /* Sources */,
+				FRAME001  /* Frameworks */,
+				RES001    /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = RodeoRanch;
+			productName = RodeoRanch;
+			productReference = PROD0001;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		PROJECT01 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					TARGET01 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = PROJCFG_LIST;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = ROOTGROUP;
+			productRefGroup = PRODGROUP;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (TARGET01);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		RES001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		SOURCES01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01AA0001, 01AA0002, 01AA0003,
+				01AA0010, 01AA0011, 01AA0012, 01AA0013, 01AA0014, 01AA0015,
+				01AA0020, 01AA0021,
+				01AA0030,
+				01AA0040,
+				01AA0050, 01AA0051, 01AA0052, 01AA0053, 01AA0054, 01AA0055,
+				01AA0060, 01AA0061,
+				01AA0070, 01AA0071,
+				01AA0080, 01AA0081, 01AA0082,
+				01AA0090, 01AA0091,
+				01AA0100,
+				01AA0110,
+				01AA0120,
+				01AA0130,
+				01AA0140, 01AA0141,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CFG_DEBUG /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				INFOPLIST_FILE = RodeoRanch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranchhq.RodeoRanch;
+				PRODUCT_NAME = RodeoRanch;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFG_RELEASE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = RodeoRanch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranchhq.RodeoRanch;
+				PRODUCT_NAME = RodeoRanch;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		PROJ_CFG_DEBUG /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		PROJ_CFG_RELEASE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BUILDCFG_LIST /* Build configuration list for PBXNativeTarget "RodeoRanch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (CFG_DEBUG, CFG_RELEASE);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		PROJCFG_LIST /* Build configuration list for PBXProject "RodeoRanch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (PROJ_CFG_DEBUG, PROJ_CFG_RELEASE);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = PROJECT01 /* Project object */;
+}
