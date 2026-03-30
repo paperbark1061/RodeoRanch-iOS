@@ -10,18 +10,26 @@ struct MyRunsView: View {
             List {
                 if !upcoming.isEmpty {
                     Section("Upcoming") {
-                        ForEach(upcoming)  { RunRow(run: $0).onTapGesture { selectedRun = $0 } }
+                        ForEach(upcoming) { run in
+                            RunRow(run: run)
+                                .onTapGesture { selectedRun = run }
+                        }
                     }
                 }
                 if !completed.isEmpty {
                     Section("Results") {
-                        ForEach(completed) { RunRow(run: $0).onTapGesture { selectedRun = $0 } }
+                        ForEach(completed) { run in
+                            RunRow(run: run)
+                                .onTapGesture { selectedRun = run }
+                        }
                     }
                 }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("My Runs")
-            .sheet(item: $selectedRun) { RunDetailView(run: $0) }
+            .sheet(item: $selectedRun) { run in
+                RunDetailView(run: run)
+            }
         }
     }
 }
