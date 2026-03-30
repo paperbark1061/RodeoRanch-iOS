@@ -1,20 +1,21 @@
 import SwiftUI
 
-/// RodeoRanch design system — Navy & Gold light theme + arena-ready dark contexts.
+/// RodeoRanch design system — Navy & Gold light theme.
+/// All colours are hardcoded hex — no Asset Catalog required.
 extension Color {
     // Primary palette
-    static let rrNavy      = Color("rrNavy")       // #1a2744
-    static let rrGold      = Color("rrGold")       // #d4a017
-    static let rrGoldLight = Color("rrGoldLight")  // #f0c040
+    static let rrNavy      = Color(hex: "#1a2744")  // deep navy
+    static let rrGold      = Color(hex: "#d4a017")  // warm gold
+    static let rrGoldLight = Color(hex: "#f0c040")  // lighter gold
 
-    // Backgrounds
-    static let rrBg        = Color("rrBg")         // system background (adaptive)
-    static let rrBg2       = Color("rrBg2")        // secondary surface
-    static let rrBg3       = Color("rrBg3")        // tertiary / card bg
+    // Backgrounds (light theme)
+    static let rrBg        = Color(hex: "#ffffff")  // page white
+    static let rrBg2       = Color(hex: "#f8f6f0")  // sand surface
+    static let rrBg3       = Color(hex: "#f0ebe0")  // warm tertiary
 
     // Text
-    static let rrTextPrimary   = Color("rrTextPrimary")
-    static let rrTextSecondary = Color("rrTextSecondary")
+    static let rrTextPrimary   = Color(hex: "#111827")  // near-black
+    static let rrTextSecondary = Color(hex: "#6b7280")  // mid-grey
 
     // Discipline colours
     static let discGold   = Color(hex: "#d4a017")  // Team Penning
@@ -24,10 +25,10 @@ extension Color {
     static let discTeal   = Color(hex: "#0e7a6a")  // Rodeo
 
     // Status
-    static let rrSuccess  = Color(hex: "#16a34a")
-    static let rrWarning  = Color(hex: "#d97706")
-    static let rrDanger   = Color(hex: "#dc2626")
-    static let rrInfo     = Color(hex: "#2563eb")
+    static let rrSuccess = Color(hex: "#16a34a")
+    static let rrWarning = Color(hex: "#d97706")
+    static let rrDanger  = Color(hex: "#dc2626")
+    static let rrInfo    = Color(hex: "#2563eb")
 
     // Stripe (third-party brand — do not alter)
     static let stripePurple = Color(hex: "#635bff")
