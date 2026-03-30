@@ -107,7 +107,6 @@ struct ScoreEntryView: View {
     }
 
     private func submitScore() {
-        // Stop timer if running
         stopTimer()
         // TODO: POST to /api/scores
         submitted = true
@@ -334,7 +333,8 @@ struct PenaltySection: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Penalties").font(.rrLabel).foregroundColor(.secondary)
 
-                ForEach(penalties) { penalty in
+                // Use enumerated so we can draw a divider after every row except the last
+                ForEach(Array(penalties.enumerated()), id: \.element.id) { index, penalty in
                     let isApplied = applied.contains { $0.id == penalty.id }
                     Button {
                         toggle(penalty)
@@ -369,7 +369,8 @@ struct PenaltySection: View {
                     }
                     .buttonStyle(.plain)
 
-                    if penalty !== penalties.last {
+                    // Divider between rows — index-based, no reference comparison needed
+                    if index < penalties.count - 1 {
                         Divider()
                     }
                 }
@@ -395,10 +396,6 @@ struct PenaltySection: View {
             applied.append(penalty)
         }
     }
-}
-
-extension Array {
-    // Safe `!==` for reference comparison used in ForEach loop above
 }
 
 struct ScoreSubmittedView: View {
