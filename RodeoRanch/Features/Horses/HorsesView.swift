@@ -34,7 +34,7 @@ struct HorseRow: View {
         HStack(spacing: 12) {
             ZStack {
                 Circle().fill(Color.rrNavy.opacity(0.10))
-                Image(systemName: "horse.fill")
+                Image(systemName: "figure.equestrian.sports")
                     .font(.system(size: 20))
                     .foregroundColor(.rrNavy)
             }
