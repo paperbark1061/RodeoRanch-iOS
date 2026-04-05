@@ -23,7 +23,7 @@ struct HorsesView: View {
                 }
             }
             .sheet(isPresented: $showAddHorse) { AddHorseView(horses: $horses) }
-            .sheet(item: $selectedHorse)        { HorseDetailView(horse: $0) }
+            .sheet(item: $selectedHorse) { HorseDetailView(horse: $0) }
         }
     }
 }
@@ -34,7 +34,9 @@ struct HorseRow: View {
         HStack(spacing: 12) {
             ZStack {
                 Circle().fill(Color.rrNavy.opacity(0.10))
-                HorseIcon(size: 22, color: .rrNavy)
+                Image(systemName: "horse.fill")
+                    .font(.system(size: 20))
+                    .foregroundColor(.rrNavy)
             }
             .frame(width: 44, height: 44)
 
@@ -108,9 +110,9 @@ struct AddHorseView: View {
                     Picker("Sex", selection: $sex) {
                         ForEach(HorseSex.allCases, id: \.self) { Text($0.displayName).tag($0) }
                     }
-                    TextField("Breed",         text: $breed)
-                    TextField("Colour",         text: $colour)
-                    TextField("Year of birth",  text: $yearOfBirth).keyboardType(.numberPad)
+                    TextField("Breed",        text: $breed)
+                    TextField("Colour",        text: $colour)
+                    TextField("Year of birth", text: $yearOfBirth).keyboardType(.numberPad)
                 }
                 Section("Registration") {
                     TextField("Registration number (optional)", text: $regNumber)
@@ -120,10 +122,10 @@ struct AddHorseView: View {
                         let h = Horse(
                             id: UUID().uuidString, name: name,
                             registrationNumber: regNumber.isEmpty ? nil : regNumber,
-                            breed: breed.isEmpty ? nil : breed,
+                            breed:  breed.isEmpty  ? nil : breed,
                             colour: colour.isEmpty ? nil : colour,
                             sex: sex, yearOfBirth: Int(yearOfBirth),
-                            ownerId: MockData.currentUser.id,
+                            ownerId:   MockData.currentUser.id,
                             ownerName: MockData.currentUser.fullName,
                             notes: nil, isActive: true, photoURL: nil
                         )
