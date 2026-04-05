@@ -1,203 +1,116 @@
 import SwiftUI
+import UIKit
 
-/// Custom horse silhouette drawn as a single continuous filled outline.
-/// Based on a 100×100 grid. Drawn as one closed path so it reads cleanly
-/// at any size — including 26px tab bar icons.
+// MARK: - Horse head shape
+// A bold front-facing horse head silhouette.
+// Drawn on a 100×100 grid. Reads cleanly at 26pt tab bar size.
 struct HorseShape: Shape {
     func path(in rect: CGRect) -> Path {
-        let sx = rect.width  / 100
-        let sy = rect.height / 100
-
-        func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
-            CGPoint(x: x * sx, y: y * sy)
-        }
-
+        let w = rect.width  / 100
+        let h = rect.height / 100
         var p = Path()
 
-        // Start at nose tip and trace the full outline clockwise:
-        // nose → forehead → poll/ear → neck crest → withers → back →
-        // rump → tail → hindquarters → hind legs → belly → front legs →
-        // chest → throatlatch → back to nose
+        // ---- Outer head / face outline (clockwise) ----
+        // Start at bottom-left of jaw
+        p.move(to: CGPoint(x: 24*w, y: 88*h))
 
-        // Nose
-        p.move(to: pt(12, 38))
+        // Left jaw up to cheek
+        p.addCurve(to: CGPoint(x: 20*w, y: 68*h),
+                   control1: CGPoint(x: 20*w, y: 85*h),
+                   control2: CGPoint(x: 18*w, y: 76*h))
 
-        // Muzzle / nose bridge curve up to forehead
-        p.addCurve(to: pt(16, 22),
-                   control1: pt(9, 34),
-                   control2: pt(10, 26))
+        // Left cheek up to eye socket
+        p.addCurve(to: CGPoint(x: 22*w, y: 50*h),
+                   control1: CGPoint(x: 20*w, y: 62*h),
+                   control2: CGPoint(x: 20*w, y: 56*h))
 
-        // Forehead up to poll
-        p.addCurve(to: pt(22, 12),
-                   control1: pt(19, 19),
-                   control2: pt(20, 14))
+        // Left temple curving to forehead
+        p.addCurve(to: CGPoint(x: 30*w, y: 30*h),
+                   control1: CGPoint(x: 22*w, y: 44*h),
+                   control2: CGPoint(x: 24*w, y: 36*h))
 
-        // Ear (sharp point)
-        p.addLine(to: pt(20,  4))
-        p.addLine(to: pt(27,  9))
+        // Forehead left to poll
+        p.addCurve(to: CGPoint(x: 38*w, y: 14*h),
+                   control1: CGPoint(x: 32*w, y: 26*h),
+                   control2: CGPoint(x: 34*w, y: 18*h))
 
-        // Poll down into neck crest
-        p.addCurve(to: pt(38, 18),
-                   control1: pt(28, 10),
-                   control2: pt(34, 15))
+        // Left ear (sharp upward spike)
+        p.addLine(to: CGPoint(x: 34*w, y:  4*h))   // ear tip
+        p.addLine(to: CGPoint(x: 42*w, y: 12*h))   // inner base
 
-        // Neck crest sweeping to withers
-        p.addCurve(to: pt(55, 22),
-                   control1: pt(44, 18),
-                   control2: pt(50, 20))
+        // Poll (top of head, between ears)
+        p.addCurve(to: CGPoint(x: 58*w, y: 12*h),
+                   control1: CGPoint(x: 46*w, y:  8*h),
+                   control2: CGPoint(x: 54*w, y:  8*h))
 
-        // Withers dip
-        p.addCurve(to: pt(62, 24),
-                   control1: pt(58, 21),
-                   control2: pt(60, 22))
+        // Right ear
+        p.addLine(to: CGPoint(x: 66*w, y:  4*h))   // ear tip
+        p.addLine(to: CGPoint(x: 62*w, y: 14*h))   // inner base
 
-        // Back — slight hollow
-        p.addCurve(to: pt(80, 26),
-                   control1: pt(70, 22),
-                   control2: pt(76, 23))
+        // Forehead right side down
+        p.addCurve(to: CGPoint(x: 70*w, y: 30*h),
+                   control1: CGPoint(x: 66*w, y: 18*h),
+                   control2: CGPoint(x: 68*w, y: 26*h))
 
-        // Rump — rounded high point
-        p.addCurve(to: pt(90, 34),
-                   control1: pt(85, 25),
-                   control2: pt(90, 28))
+        // Right temple
+        p.addCurve(to: CGPoint(x: 78*w, y: 50*h),
+                   control1: CGPoint(x: 76*w, y: 36*h),
+                   control2: CGPoint(x: 80*w, y: 44*h))
 
-        // Tail base
-        p.addCurve(to: pt(93, 42),
-                   control1: pt(91, 37),
-                   control2: pt(93, 39))
+        // Right cheek
+        p.addCurve(to: CGPoint(x: 80*w, y: 68*h),
+                   control1: CGPoint(x: 80*w, y: 56*h),
+                   control2: CGPoint(x: 82*w, y: 62*h))
 
-        // Tail flowing up and out
-        p.addCurve(to: pt(100, 28),
-                   control1: pt(96, 40),
-                   control2: pt(102, 34))
-        p.addCurve(to: pt(94, 22),
-                   control1: pt(99, 24),
-                   control2: pt(96, 22))
-        p.addCurve(to: pt(91, 36),
-                   control1: pt(91, 23),
-                   control2: pt(90, 30))
+        // Right jaw down to chin
+        p.addCurve(to: CGPoint(x: 76*w, y: 88*h),
+                   control1: CGPoint(x: 82*w, y: 76*h),
+                   control2: CGPoint(x: 80*w, y: 84*h))
 
-        // Back of hindquarters dropping down
-        p.addCurve(to: pt(88, 52),
-                   control1: pt(91, 41),
-                   control2: pt(90, 47))
-
-        // Hind leg 1 (right, extended back)
-        p.addLine(to: pt(86, 52))
-        p.addCurve(to: pt(82, 68),
-                   control1: pt(85, 58),
-                   control2: pt(84, 63))
-        p.addCurve(to: pt(80, 80),
-                   control1: pt(81, 72),
-                   control2: pt(80, 76))
-        // Hoof
-        p.addLine(to: pt(80, 86))
-        p.addLine(to: pt(85, 88))
-        p.addLine(to: pt(85, 90))
-        p.addLine(to: pt(76, 90))
-        p.addLine(to: pt(76, 88))
-        p.addLine(to: pt(78, 87))
-        p.addCurve(to: pt(76, 72),
-                   control1: pt(77, 84),
-                   control2: pt(76, 78))
-        p.addCurve(to: pt(72, 58),
-                   control1: pt(75, 66),
-                   control2: pt(73, 62))
-        p.addLine(to: pt(70, 54))
-
-        // Belly curve forward
-        p.addCurve(to: pt(38, 56),
-                   control1: pt(62, 58),
-                   control2: pt(50, 58))
-
-        // Front leg 1 (left, extended forward)
-        p.addLine(to: pt(36, 56))
-        p.addCurve(to: pt(28, 72),
-                   control1: pt(34, 62),
-                   control2: pt(29, 67))
-        p.addCurve(to: pt(24, 84),
-                   control1: pt(27, 77),
-                   control2: pt(24, 80))
-        // Hoof
-        p.addLine(to: pt(22, 88))
-        p.addLine(to: pt(16, 88))
-        p.addLine(to: pt(16, 86))
-        p.addLine(to: pt(21, 86))
-        p.addCurve(to: pt(26, 70),
-                   control1: pt(23, 83),
-                   control2: pt(26, 76))
-        p.addCurve(to: pt(32, 55),
-                   control1: pt(27, 64),
-                   control2: pt(30, 59))
-
-        // Second front leg (slightly behind, tucked)
-        p.addLine(to: pt(34, 55))
-        p.addCurve(to: pt(30, 70),
-                   control1: pt(34, 62),
-                   control2: pt(31, 66))
-        p.addCurve(to: pt(30, 82),
-                   control1: pt(29, 75),
-                   control2: pt(29, 79))
-        // Hoof
-        p.addLine(to: pt(28, 88))
-        p.addLine(to: pt(34, 88))
-        p.addLine(to: pt(35, 86))
-        p.addLine(to: pt(33, 86))
-        p.addCurve(to: pt(36, 70),
-                   control1: pt(34, 81),
-                   control2: pt(36, 75))
-        p.addCurve(to: pt(38, 56),
-                   control1: pt(37, 64),
-                   control2: pt(38, 60))
-
-        // Chest curve up
-        p.addCurve(to: pt(36, 44),
-                   control1: pt(36, 52),
-                   control2: pt(35, 48))
-
-        // Hind leg 2 (slightly in front, tucked)
-        p.addLine(to: pt(70, 54))
-        p.addLine(to: pt(72, 54))
-        p.addCurve(to: pt(74, 68),
-                   control1: pt(73, 59),
-                   control2: pt(74, 63))
-        p.addCurve(to: pt(72, 82),
-                   control1: pt(74, 74),
-                   control2: pt(73, 78))
-        // Hoof
-        p.addLine(to: pt(70, 88))
-        p.addLine(to: pt(76, 88))
-        p.addLine(to: pt(77, 86))
-        p.addLine(to: pt(73, 86))
-        p.addCurve(to: pt(70, 72),
-                   control1: pt(73, 83),
-                   control2: pt(71, 77))
-        p.addCurve(to: pt(68, 58),
-                   control1: pt(69, 66),
-                   control2: pt(68, 62))
-
-        // Chest / lower neck
-        p.addCurve(to: pt(28, 44),
-                   control1: pt(32, 44),
-                   control2: pt(30, 44))
-
-        // Throatlatch back up to jaw
-        p.addCurve(to: pt(20, 36),
-                   control1: pt(24, 44),
-                   control2: pt(20, 40))
-
-        // Jaw back to nose
-        p.addCurve(to: pt(12, 38),
-                   control1: pt(18, 34),
-                   control2: pt(14, 36))
-
+        // Chin / muzzle (slightly protruding bump)
+        p.addCurve(to: CGPoint(x: 60*w, y: 94*h),
+                   control1: CGPoint(x: 74*w, y: 92*h),
+                   control2: CGPoint(x: 68*w, y: 96*h))
+        p.addCurve(to: CGPoint(x: 50*w, y: 96*h),
+                   control1: CGPoint(x: 57*w, y: 93*h),
+                   control2: CGPoint(x: 54*w, y: 96*h))
+        p.addCurve(to: CGPoint(x: 40*w, y: 94*h),
+                   control1: CGPoint(x: 46*w, y: 96*h),
+                   control2: CGPoint(x: 43*w, y: 93*h))
+        p.addCurve(to: CGPoint(x: 24*w, y: 88*h),
+                   control1: CGPoint(x: 32*w, y: 96*h),
+                   control2: CGPoint(x: 26*w, y: 92*h))
         p.closeSubpath()
+
+        // ---- Muzzle band (lighter inner area suggested by a cutout) ----
+        // Adds a recessed muzzle plane for definition
+        p.move(to: CGPoint(x: 36*w, y: 76*h))
+        p.addCurve(to: CGPoint(x: 50*w, y: 80*h),
+                   control1: CGPoint(x: 40*w, y: 82*h),
+                   control2: CGPoint(x: 46*w, y: 82*h))
+        p.addCurve(to: CGPoint(x: 64*w, y: 76*h),
+                   control1: CGPoint(x: 54*w, y: 82*h),
+                   control2: CGPoint(x: 60*w, y: 82*h))
+        p.addCurve(to: CGPoint(x: 66*w, y: 68*h),
+                   control1: CGPoint(x: 66*w, y: 74*h),
+                   control2: CGPoint(x: 67*w, y: 70*h))
+        p.addCurve(to: CGPoint(x: 50*w, y: 64*h),
+                   control1: CGPoint(x: 64*w, y: 64*h),
+                   control2: CGPoint(x: 58*w, y: 63*h))
+        p.addCurve(to: CGPoint(x: 34*w, y: 68*h),
+                   control1: CGPoint(x: 42*w, y: 63*h),
+                   control2: CGPoint(x: 36*w, y: 64*h))
+        p.addCurve(to: CGPoint(x: 36*w, y: 76*h),
+                   control1: CGPoint(x: 33*w, y: 70*h),
+                   control2: CGPoint(x: 34*w, y: 74*h))
+        p.closeSubpath()
+
         return p
     }
 }
 
-/// Convenience view — same usage as Image(systemName:).
-/// Example: HorseIcon(size: 24, color: .rrNavy)
+// MARK: - HorseIcon view
+/// Drop-in view. Usage: HorseIcon(size: 24, color: .rrNavy)
 struct HorseIcon: View {
     var size: CGFloat = 24
     var color: Color = .primary
@@ -208,3 +121,24 @@ struct HorseIcon: View {
             .frame(width: size, height: size)
     }
 }
+
+// MARK: - Tab bar image
+// Rendered once at launch. Uses UIGraphicsImageRenderer (no @MainActor needed).
+// The even-odd fill rule punches the muzzle band out of the face, giving depth.
+let horseTabUIImage: UIImage = {
+    let size = CGSize(width: 26, height: 26)
+    let renderer = UIGraphicsImageRenderer(size: size)
+    let raw = renderer.image { ctx in
+        let cgCtx = ctx.cgContext
+        cgCtx.setFillColor(UIColor.black.cgColor)
+
+        // Build the two sub-paths and fill with even-odd rule
+        // so the muzzle oval punches a lighter hole in the face
+        let shapePath = HorseShape()
+            .path(in: CGRect(origin: .zero, size: size))
+            .cgPath
+        cgCtx.addPath(shapePath)
+        cgCtx.fillPath(using: .evenOdd)
+    }
+    return raw.withRenderingMode(.alwaysTemplate)
+}()
