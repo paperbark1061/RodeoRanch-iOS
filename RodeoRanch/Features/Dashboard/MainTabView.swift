@@ -1,21 +1,4 @@
 import SwiftUI
-import UIKit
-
-// Rendered once at app startup — avoids repeated rasterisation and
-// sidesteps the tabItem closure compiler ambiguity entirely.
-private let horseTabUIImage: UIImage = {
-    let size = CGSize(width: 26, height: 26)
-    let renderer = UIGraphicsImageRenderer(size: size)
-    let raw = renderer.image { ctx in
-        let path = HorseShape()
-            .path(in: CGRect(origin: .zero, size: size))
-            .cgPath
-        ctx.cgContext.addPath(path)
-        ctx.cgContext.setFillColor(UIColor.black.cgColor)
-        ctx.cgContext.fillPath()
-    }
-    return raw.withRenderingMode(.alwaysTemplate)
-}()
 
 struct MainTabView: View {
     @EnvironmentObject var router: AppRouter
@@ -36,13 +19,7 @@ struct MainTabView: View {
                 .tag(AppTab.myRuns)
 
             HorsesView()
-                .tabItem {
-                    Label {
-                        Text("Horses")
-                    } icon: {
-                        Image(uiImage: horseTabUIImage)
-                    }
-                }
+                .tabItem { Label("Horses", systemImage: "horse.fill") }
                 .tag(AppTab.horses)
 
             StandingsView()
