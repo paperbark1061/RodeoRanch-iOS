@@ -24,7 +24,7 @@ struct MainTabView: View {
                 .tag(AppTab.myRuns)
 
             HorsesView()
-                .tabItem { Label("Horses",    systemImage: "hare.fill") }
+                .tabItem { Label("Horses",    systemImage: "horse.fill") }
                 .tag(AppTab.horses)
 
             StandingsView()
@@ -43,8 +43,8 @@ struct MainTabView: View {
         }
     }
 
-    /// Explicitly sets tab bar colours via UIKit so icons are always
-    /// visible regardless of SwiftUI tint propagation issues.
+    /// Configures tab bar colours via UIKit so icons are always
+    /// visible — navy when selected, mid-grey when unselected.
     private func configureTabBarAppearance() {
         let navy    = UIColor(red: 0.102, green: 0.153, blue: 0.267, alpha: 1) // #1a2744
         let midGrey = UIColor(red: 0.50,  green: 0.50,  blue: 0.55,  alpha: 1)
