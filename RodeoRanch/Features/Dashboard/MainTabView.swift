@@ -8,19 +8,19 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $router.selectedTab) {
             DashboardView()
-                .tabItem { Label("Home", systemImage: "house.fill") }
+                .tabItem { Label("Home",     systemImage: "house.fill") }
                 .tag(AppTab.dashboard)
 
             EventsView()
-                .tabItem { Label("Events", systemImage: "calendar") }
+                .tabItem { Label("Events",   systemImage: "calendar") }
                 .tag(AppTab.events)
 
             MyRunsView()
-                .tabItem { Label("My Runs", systemImage: "timer") }
+                .tabItem { Label("My Runs",  systemImage: "timer") }
                 .tag(AppTab.myRuns)
 
             HorsesView()
-                .tabItem { Label("Horses", systemImage: "horse.fill") }
+                .tabItem { Label("Horses",   systemImage: "horse.fill") }
                 .tag(AppTab.horses)
 
             StandingsView()
@@ -34,7 +34,7 @@ struct MainTabView: View {
             }
 
             ProfileView()
-                .tabItem { Label("Profile", systemImage: "person.circle") }
+                .tabItem { Label("Profile",  systemImage: "person.circle") }
                 .tag(AppTab.profile)
         }
         .tint(.rrNavy)

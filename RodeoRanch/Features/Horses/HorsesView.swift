@@ -43,7 +43,7 @@ struct HorseRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(horse.name).font(.rrTitle3).foregroundColor(.rrTextPrimary)
                 HStack(spacing: 8) {
-                    if let breed = horse.breed  { Text(breed).font(.rrCaption) }
+                    if let breed = horse.breed { Text(breed).font(.rrCaption) }
                     Text(horse.sex.displayName).font(.rrCaption)
                     if let year = horse.yearOfBirth { Text(String(year)).font(.rrCaption) }
                 }
@@ -106,11 +106,11 @@ struct AddHorseView: View {
         NavigationStack {
             Form {
                 Section("Details") {
-                    TextField("Name", text: $name)
+                    TextField("Name",          text: $name)
                     Picker("Sex", selection: $sex) {
                         ForEach(HorseSex.allCases, id: \.self) { Text($0.displayName).tag($0) }
                     }
-                    TextField("Breed",        text: $breed)
+                    TextField("Breed",         text: $breed)
                     TextField("Colour",        text: $colour)
                     TextField("Year of birth", text: $yearOfBirth).keyboardType(.numberPad)
                 }
