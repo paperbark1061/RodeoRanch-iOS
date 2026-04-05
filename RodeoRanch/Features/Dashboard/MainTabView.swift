@@ -24,7 +24,7 @@ struct MainTabView: View {
                 .tag(AppTab.myRuns)
 
             HorsesView()
-                .tabItem { Label("Horses",    systemImage: "horse.fill") }
+                .tabItem { Label("Horses",    systemImage: "figure.equestrian.sports") }
                 .tag(AppTab.horses)
 
             StandingsView()
